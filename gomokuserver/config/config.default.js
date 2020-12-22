@@ -23,6 +23,19 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+    domainWhiteList:['*']
+  }
+
+  config.cors = {
+    origin:"http://127.0.0.1:7001",
+    credentials: true,
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  }
+
   return {
     ...config,
     ...userConfig,

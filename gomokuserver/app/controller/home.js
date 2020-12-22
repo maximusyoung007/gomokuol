@@ -7,6 +7,11 @@ class HomeController extends Controller {
     const { ctx } = this;
     ctx.body = 'hi, egg';
   }
+
+  async test() {
+    const {ctx} = this;
+    ctx.body = 'test interface';
+  }
 }
 
 module.exports = HomeController;
