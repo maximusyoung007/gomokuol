@@ -2,12 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import LoginPage from "./login/loginPage";
+import Router from "./router";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <LoginPage />
-  </React.StrictMode>,
+    <Router/>,
   document.getElementById('root')
 );
 

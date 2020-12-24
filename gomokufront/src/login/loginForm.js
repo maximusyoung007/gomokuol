@@ -1,10 +1,20 @@
 import React from 'react';
 import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {useHistory} from "react-router";
 
 const LoginForm = () => {
+    let history = useHistory();
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+        history.push({
+            pathname:"/gameLobby",
+            state: {
+                username: values.username,
+                password: values.password,
+                remember: values.remember
+            }
+        });
     }
 
     return (
