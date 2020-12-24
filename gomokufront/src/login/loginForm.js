@@ -8,7 +8,7 @@ const LoginForm = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         history.push({
-            pathname:"/gameLobby",
+            pathname:"/game",
             state: {
                 username: values.username,
                 password: values.password,
