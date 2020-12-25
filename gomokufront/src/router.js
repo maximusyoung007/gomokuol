@@ -11,12 +11,7 @@ const BasicRoute = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={LoginPage}/>
-            <Route exact path="/game/" component={Game}/>
-            {/*<Redirect to="/game/lobby" component={Messages}/>*/}
-            <Route path="/game/lobby" component={Lobby}/>
-            <Route path="/game/messages" component={Messages}/>
-            <Route path="/game/friends" component={Friends}/>
-            <Route path="/game/aboutMe" component={AboutMe}/>
+            <Route path="/game/" component={Game}/>
         </Switch>
     </BrowserRouter>
 )

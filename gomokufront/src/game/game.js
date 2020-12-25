@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Router, useLocation} from "react-router";
-import {Route,Switch} from "react-router-dom"
+import {Link, Route, Switch} from "react-router-dom"
 import GameHeader from "./gameHeader"
 import {Button, Menu} from "antd";
 import Lobby from "./gameLobby/gameLobby";
@@ -11,24 +11,23 @@ import { HomeOutlined, TeamOutlined, CommentOutlined, UserOutlined} from '@ant-d
 
 require("./game.css");
 
-const GameLobby= () => {
-    let location = useLocation();
-    let id = location.state.username;
+const Game= ({match}) => {
     return(
-        <div class="HolyGrail">
+        <div className="HolyGrail">
             <header>
-
+                <GameHeader></GameHeader>
             </header>
-            <div className="HolyGrail-body">
-                <Router>
-                    <Route path="/game/lobby" component={Lobby}/>
-                    <Route path="/game/messages" component={Messages}/>
-                    <Route path="/game/friends" component={Friends}/>
-                    <Route path="/game/aboutMe" component={AboutMe}/>
-                </Router>
+            <div className={"HolyGrail-body"}>
+                <Switch>
+                    <Route exact path={`${match.url}`} component={Lobby}/>
+                    <Route path={`${match.url}/aboutMe`} component={AboutMe}/>
+                    <Route path={`${match.url}/message`} component={Messages}/>
+                    <Route path={`${match.url}/friends`} component={Friends}/>
+                    <Route path={`${match.url}/lobby`} component={Lobby}/>
+                </Switch>
             </div>
         </div>
     )
 }
 
-export default GameLobby;
+export default Game;

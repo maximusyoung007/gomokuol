@@ -11,8 +11,6 @@ const LoginForm = () => {
             pathname:"/game",
             state: {
                 username: values.username,
-                password: values.password,
-                remember: values.remember
             }
         });
     }
