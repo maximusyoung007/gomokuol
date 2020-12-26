@@ -61,7 +61,7 @@ const columns = [
 // ];
 
 const data = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 20; i++) {
     data.push({
         key: i,
         tableIndex: `10 ${i}`,
@@ -76,7 +76,8 @@ const LobbyTables = () => {
             columns={columns}
             dataSource={data}
             pagination={false}
-            scroll={{y:600,x:600}}>
+            scroll={{y:550}}>
+            size={"middle"}
         </Table>
     )
 }

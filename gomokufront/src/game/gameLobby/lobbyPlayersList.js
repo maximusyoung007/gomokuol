@@ -1,12 +1,17 @@
 import React,{useState} from "react"
-import {Table,Tag,Space} from "antd"
+import {Table,Avatar} from "antd"
+import { UserOutlined } from '@ant-design/icons';
 
 const columns = [
     {
         title: '玩家',
         dataIndex: 'player',
         key: 'player',
-        render: text => <span>{text}</span>,
+        render: text =>
+            <div>
+                <Avatar size="small" style={{backgroundColor:'#87d068'}} icon={<UserOutlined />}/>
+                <span>{text}</span>
+            </div>
     },
     {
         title: '积分',
@@ -54,6 +59,7 @@ const LobbyPlayersList = () => {
             size={"small"}
             showHeader={false}
             title={() => '在线玩家'}
+            scroll={{y:600}}
         ></Table>
     )
 }
