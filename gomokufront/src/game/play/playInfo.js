@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import {Card,Skeleton,Switch,Avatar} from "antd";
+import {Card,Button,Avatar} from "antd";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 const {Meta} = Card
@@ -19,10 +19,19 @@ const PlayInfo = () => {
         }
     ]
     const contentList = {
-        chat: <p>聊天</p>,
-        history: <p>历史</p>,
-        player: <p>玩家</p>
+        chat:
+            <div className={"playInfo"}>
+            <p>聊天</p>
+            <Button className={"playInfoButton"} size={"small"} type="primary">发送</Button>
+            </div>,
+        history:
+            <div className={"playInfo"}>
+            <p>history</p>
+            <Button className={"playInfoButton"} size={"small"} type="primary">保存</Button>
+            </div>,
+        player: <textarea className={"playInfo"}>玩家</textarea>
     }
+
 
     const [infoKey,setInfoKey] = useState("history");
 
@@ -55,7 +64,7 @@ const PlayInfo = () => {
                 <div>倒计时：</div>
             </Card>
             <Card
-                style={{ width: '100%' }}
+                style={{ width: 280 }}
                 tabList={tabList}
                 activeTabKey={infoKey}
                 onTabChange={key => {
