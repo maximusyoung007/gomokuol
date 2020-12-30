@@ -51,7 +51,20 @@ class Board extends React.Component {
     }
 
     moveOut(e) {
+        const havePut = this.state.havePut;
         this.setState({onBoard: -1});
+        for(let i = 0;i < 15;i++) {
+            for(let j = 0;j < 15;j++) {
+                let x = 22 + i * 44;
+                let y = 22 + j * 44;
+                let s = x + "," + y;
+                if(havePut.indexOf(s) == -1) {
+                    const c = document.getElementById("board");
+                    const context = c.getContext("2d");
+                    this.drawIndex(context, x, y, "white");
+                }
+            }
+        }
     }
 
     drawIndex(ctx,indexX,indexY,color) {
@@ -98,7 +111,6 @@ class Board extends React.Component {
                     let s = indexX + "," + indexY;
                     if (havePut.indexOf(s) == -1) {
                         if (Math.abs(x - indexX) < 22 && Math.abs(y - indexY) < 22) {
-                            console.log(indexX + "---" + indexY);
                             this.drawIndex(ctx,indexX,indexY,"red");
                         } else {
                             this.drawIndex(ctx,indexX,indexY,"white");
