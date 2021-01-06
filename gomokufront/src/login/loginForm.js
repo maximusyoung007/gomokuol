@@ -2,17 +2,23 @@ import React from 'react';
 import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
+import axios from "axios";
 
 const LoginForm = () => {
     let history = useHistory();
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        history.push({
-            pathname:"/game",
-            state: {
-                username: values.username,
-            }
-        });
+        axios({
+            method: 'get',
+            url: 'test',
+        }).then(function(response){
+            console.log(response);
+            history.push({
+                pathname:"/game",
+                state: {
+                    username: values.username,
+                }
+            });
+        })
     }
 
     return (

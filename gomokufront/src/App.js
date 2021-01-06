@@ -1,6 +1,5 @@
 import './App.css';
 import {Button} from 'antd'
-import axios from "axios";
 
 function App() {
 

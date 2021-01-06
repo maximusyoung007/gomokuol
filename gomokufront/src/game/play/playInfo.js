@@ -1,6 +1,5 @@
 import React,{useState} from "react"
 import {Card,Button,Avatar} from "antd";
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 const {Meta} = Card
 const PlayInfo = () => {

@@ -1,6 +1,6 @@
-import React,{useState} from "react"
-import {Table,Tag,Space} from "antd"
-import {useHistory, useLocation} from "react-router";
+import React from "react"
+import {Table,Space} from "antd"
+import {useLocation} from "react-router";
 import {Link} from "react-router-dom";
 import {Button} from "antd";
 
@@ -81,8 +81,8 @@ const LobbyTables = () => {
             columns={columns}
             dataSource={data}
             pagination={false}
-            scroll={{y:550}}>
-            size={"middle"}
+            scroll={{y:580}}
+            size={"middle"}>
         </Table>
     )
 }

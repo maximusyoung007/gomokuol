@@ -5,12 +5,12 @@ import LobbyPLayersList from "./lobbyPlayersList";
 
 const GameLobby = () => {
     return (
-        <div  >
-            <Space style={{paddingTop: "20px"}}>
+        <div  style={{marginTop: '10px'}}>
+            <Space style={{paddingTop: "10px"}}>
                 <Button type="primary">新游戏桌</Button>
                 <Button type="primary">随机匹配</Button>
             </Space>
-            <div style={{paddingTop: "10px",display:"inline"}}>
+            <div style={{paddingTop: "10px"}}>
                 <Row>
                     <Col span={16}>
                         <LobbyTables></LobbyTables>

@@ -31,6 +31,16 @@ class UserController extends Controller {
             name,age
         }
     }
+
+    async login() {
+        const {ctx} = this;
+        const {username,password} = ctx.request.body;
+        console.log(username);
+        ctx.body = {
+            username,
+            password
+        }
+    }
 }
 
 module.exports = UserController
