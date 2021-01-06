@@ -9,9 +9,8 @@ const LoginForm = () => {
     const onFinish = (values) => {
         axios({
             method: 'get',
-            url: 'test',
+            url: 'user/test',
         }).then(function(response){
-            console.log(response);
             history.push({
                 pathname:"/game",
                 state: {
