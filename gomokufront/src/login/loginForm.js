@@ -8,9 +8,14 @@ const LoginForm = () => {
     let history = useHistory();
     const onFinish = (values) => {
         axios({
-            method: 'get',
-            url: 'user/test',
+            method: 'post',
+            url: 'user/findOne',
+            data:{
+                name: values.username,
+                password: values.password
+            }
         }).then(function(response){
+            console.log("response" + response);
             history.push({
                 pathname:"/game",
                 state: {
