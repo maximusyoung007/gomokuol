@@ -5,15 +5,20 @@ import {UserDto} from "../dto/user.dto";
 
 @Controller('user')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-    @Get('test')
-    testCrossDomain(): string {
-        return this.userService.testCrossDomain();
-    }
+  @Get('test')
+  testCrossDomain(): string {
+    return this.userService.testCrossDomain();
+  }
 
-    @Post("findOne")
-    findOne(@Body() userDto:UserDto): Promise<User[]> {
-        return this.userService.findOne(userDto.name,userDto.password);
-    }
+  @Post("findOne")
+  findOne(@Body() userDto:UserDto): Promise<User> {
+    return this.userService.findOne(userDto.name);
+  }
+
+  @Post("register")
+  register(@Body() userDto:UserDto) {
+    return this.userService.register(userDto);
+  }
 }

@@ -21,6 +21,7 @@ import {User} from "./entity/user.entity"
         "database":'gomoku',
         "entities": [User],
         "synchronize": true,
+        "logging": true
       })
   ],
   controllers: [AppController],
