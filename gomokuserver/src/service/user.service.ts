@@ -1,20 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
-import {User} from "../entity/user.entity";
-import {Repository} from "typeorm";
-import {encryptPassword, makeSalt} from "../util/cryptogram";
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../entity/user.entity';
+import { Repository } from 'typeorm';
+import { encryptPassword, makeSalt } from '../util/cryptogram';
 
 @Injectable()
 export class UserService {
   //使用 @InjectRepository()装饰器将 UsersRepository 注入到 UsersService
-  constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+  ) {}
 
-  async findOne(name:string): Promise<User> {
+  async findOne(name: string): Promise<User> {
     try {
-      const user = this.userRepository.createQueryBuilder("user").where("user.name = :name", {name: name}).getOne();
+      const user = this.userRepository
+        .createQueryBuilder('user')
+        .where('user.name = :name', { name: name })
+        .getOne();
       return user;
     } catch (error) {
-      console.log("error");
+      console.log('error');
       return void 0;
     }
   }
@@ -28,21 +33,21 @@ export class UserService {
    * @param requestBody
    */
   async register(requestBody: any): Promise<any> {
-    const {name,realName,password,rePassword,mobile} = requestBody;
-    if(password !== rePassword) {
+    const { name, realName, password, rePassword, mobile } = requestBody;
+    if (password !== rePassword) {
       return {
-          code: 400,
-          message: "两次输入密码不一致"
-      }
+        code: 400,
+        message: '两次输入密码不一致',
+      };
     }
 
     const user = await this.findOne(name);
-    console.log("user:" + user);
-    if(user !== undefined) {
+    console.log('user:' + user);
+    if (user !== undefined) {
       return {
-          code: 400,
-          message: "该用户已经存在"
-      }
+        code: 400,
+        message: '该用户已经存在',
+      };
     }
 
     const salt = makeSalt();

@@ -3,6 +3,7 @@ import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
   let history = useHistory();
@@ -23,6 +24,10 @@ const LoginForm = () => {
         }
       });
     })
+  }
+
+  const toRegisterPage = {
+    pathname: '/register',
   }
 
   return (
@@ -79,7 +84,7 @@ const LoginForm = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
-          或者 <a href="">注册！</a>
+          或者 <Link to="toRegisterPage">注册！</Link>
         </Form.Item>
       </Form>
     </div>
