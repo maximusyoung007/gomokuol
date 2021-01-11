@@ -26,10 +26,6 @@ const LoginForm = () => {
     })
   }
 
-  const toRegisterPage = {
-    pathname: '/register',
-  }
-
   return (
     <div>
       <div className={"loginTips"}>
@@ -84,7 +80,7 @@ const LoginForm = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
-          或者 <Link to="toRegisterPage">注册！</Link>
+          或者 <a href='register'>注册！</a>
         </Form.Item>
       </Form>
     </div>
