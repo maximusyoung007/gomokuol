@@ -14,8 +14,8 @@ export class UserService {
       const user = this.userRepository.createQueryBuilder("user").where("user.name = :name", {name: name}).getOne();
       return user;
     } catch (error) {
-        console.log("error");
-        return void 0;
+      console.log("error");
+      return void 0;
     }
   }
 
@@ -30,10 +30,10 @@ export class UserService {
   async register(requestBody: any): Promise<any> {
     const {name,realName,password,rePassword,mobile} = requestBody;
     if(password !== rePassword) {
-        return {
-            code: 400,
-            message: "两次输入密码不一致"
-        }
+      return {
+          code: 400,
+          message: "两次输入密码不一致"
+      }
     }
 
     const user = await this.findOne(name);

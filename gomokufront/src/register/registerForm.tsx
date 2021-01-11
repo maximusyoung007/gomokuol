@@ -1,28 +1,13 @@
-import React from 'react';
+import React from "react";
 import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
 import axios from "axios";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   let history = useHistory();
-  const onFinish = (values) => {
-    axios({
-      method: 'post',
-      url: 'user/findOne',
-      data:{
-        name: values.username,
-        password: values.password
-      }
-    }).then(function(response){
-      console.log("response" + response);
-      history.push({
-        pathname:"/game",
-        state: {
-          username: values.username,
-        }
-      });
-    })
+  const onFinish = (values: any) => {
+    console.log(values);
   }
 
   return (
@@ -86,4 +71,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default RegisterForm
