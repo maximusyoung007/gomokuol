@@ -19,7 +19,7 @@ export class UserService {
         .getOne();
       return user;
     } catch (error) {
-      console.log('error');
+      console.log('error:' + error);
       return void 0;
     }
   }

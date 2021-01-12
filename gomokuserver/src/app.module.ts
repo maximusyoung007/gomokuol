@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './module/user.module';
+import { UserModule } from './users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { User } from './entity/user.entity';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 /**
  * 应用程序根模块
@@ -23,9 +25,10 @@ import { User } from './entity/user.entity';
       synchronize: true,
       logging: true,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}
