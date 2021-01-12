@@ -3,7 +3,6 @@ import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
 import axios from "axios";
-import {Link} from "react-router-dom";
 
 const LoginForm = () => {
   let history = useHistory();

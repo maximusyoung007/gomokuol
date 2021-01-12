@@ -33,7 +33,7 @@ export class UserService {
    * @param requestBody
    */
   async register(requestBody: any): Promise<any> {
-    const { name, realName, password, rePassword, mobile } = requestBody;
+    const { name, email, password, rePassword, mobile } = requestBody;
     if (password !== rePassword) {
       return {
         code: 400,
@@ -51,31 +51,31 @@ export class UserService {
     }
 
     const salt = makeSalt();
-    const hashPassword = encryptPassword(password,salt);
+    const hashPassword = encryptPassword(password, salt);
     try {
-     this.userRepository.createQueryBuilder()
-       .insert()
-       .into(User)
-       .values({
-         name: name,
-         realName: realName,
-         password: hashPassword,
-         mobile: mobile,
-         salt: salt,
-         isLogin: 0,
-         score: 1500
-       }).execute();
+      await this.userRepository
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values({
+          name: name,
+          email: email,
+          password: hashPassword,
+          mobile: mobile,
+          salt: salt,
+          isLogin: 0,
+          score: 1500,
+        })
+        .execute();
       return {
-        code: 200,
-        message: "注册成功"
-      }
+        code: 201,
+        message: '注册成功',
+      };
+    } catch (error) {
+      return {
+        code: 500,
+        message: 'Service error: ' + error,
+      };
     }
-    catch (error) {
-        return {
-          code:503,
-          message: 'Service error: ${error}'
-        }
-    }
-
   }
 }
