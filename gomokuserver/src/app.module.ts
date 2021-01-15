@@ -7,6 +7,9 @@ import { Connection } from 'typeorm';
 import { User } from './entity/user.entity';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { UserService } from './users/user.service';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 /**
  * 应用程序根模块
