@@ -10,13 +10,13 @@ import { AuthModule } from './auth/auth.module';
 import { UserService } from './users/user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants';
+import { UserController } from './users/user.controller';
 
 /**
  * 应用程序根模块
  */
 @Module({
   imports: [
-    UserModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '106.14.44.210',
@@ -29,9 +29,10 @@ import { jwtConstants } from './auth/constants';
       logging: true,
     }),
     AuthModule,
+    UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AuthService],
+  controllers: [AppController, UserController],
+  providers: [AppService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}

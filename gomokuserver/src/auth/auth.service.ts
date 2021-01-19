@@ -16,20 +16,36 @@ export class AuthService {
    * @param pass
    */
   async validateUser(name: string, pass: string): Promise<any> {
+    console.log(name + ' --- ' + pass);
     const user = await this.userService.findOne(name);
     const salt = user.salt;
     const hashPassword = encryptPassword(pass, salt);
     if (user && user.password === hashPassword) {
-      const { password, ...result } = user;
-      return result;
+      return {
+        code: 1,
+        msg: '验证用户成功',
+        user: user,
+      };
     }
-    return null;
+    return {
+      code: 2,
+      msg: '账号或密码不正确',
+    };
   }
 
   async login(user: any) {
     const payload = { username: user.name, sub: user.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    try {
+      return {
+        code: 200,
+        access_token: this.jwtService.sign(payload),
+        msg: '登录成功',
+      };
+    } catch (err) {
+      return {
+        code: 600,
+        msg: '账号或密码错误',
+      };
+    }
   }
 }
