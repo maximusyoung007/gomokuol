@@ -19,7 +19,6 @@ export class UserService {
         .getOne();
       return user;
     } catch (error) {
-      console.log('error:' + error);
       return void 0;
     }
   }
@@ -42,7 +41,6 @@ export class UserService {
     }
 
     const user = await this.findOne(name);
-    console.log('user:' + user);
     if (user !== undefined) {
       return {
         code: 400,

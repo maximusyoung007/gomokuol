@@ -16,16 +16,17 @@ export class AuthService {
    * @param pass
    */
   async validateUser(name: string, pass: string): Promise<any> {
-    console.log(name + ' --- ' + pass);
     const user = await this.userService.findOne(name);
-    const salt = user.salt;
-    const hashPassword = encryptPassword(pass, salt);
-    if (user && user.password === hashPassword) {
-      return {
-        code: 1,
-        msg: '验证用户成功',
-        user: user,
-      };
+    if (user !== undefined) {
+      const salt = user.salt;
+      const hashPassword = encryptPassword(pass, salt);
+      if (user.password === hashPassword) {
+        return {
+          code: 1,
+          msg: '验证用户成功',
+          user: user,
+        };
+      }
     }
     return {
       code: 2,
