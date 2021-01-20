@@ -1,12 +1,19 @@
 import axios from "axios";
 
-axios.interceptors.response.use(
-  response => {
-    return Promise.resolve(response.data);
-  },
-  error => {
-    return Promise.reject(error.data);
+axios.interceptors.request.use(function(config: any) {
+  let token = localStorage.getItem("token");
+  if(token) {
+    config.headers.Authorization = token;
   }
-)
+  return config;
+},function(error) {
 
-export default axios
+})
+
+axios.interceptors.response.use(function (response) {
+  return response.data;
+},function (error) {
+
+})
+
+export default axios;

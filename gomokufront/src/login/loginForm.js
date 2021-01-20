@@ -2,20 +2,20 @@ import React from 'react';
 import {Form,Input,Button,Checkbox} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
-import axios from "axios";
+import axios from "../interceptor/interceptor";
 
 const LoginForm = () => {
   let history = useHistory();
   const onFinish = (values) => {
     axios({
       method: 'post',
-      url: 'user/findOne',
+      url: 'user/login',
       data:{
-        name: values.username,
+        username: values.username,
         password: values.password
       }
     }).then(function(response){
-      console.log("response" + response);
+      console.log(response);
       history.push({
         pathname:"/game",
         state: {
