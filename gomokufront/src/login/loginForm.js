@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form,Input,Button,Checkbox} from "antd";
+import {Form,Input,Button,Checkbox,message} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router";
 import axios from "../interceptor/interceptor";
@@ -14,14 +14,25 @@ const LoginForm = () => {
         username: values.username,
         password: values.password
       }
-    }).then(function(response){
-      console.log(response);
-      history.push({
-        pathname:"/game",
-        state: {
-          username: values.username,
-        }
-      });
+    }).then(function(data){
+      if(data.code == 200) {
+        let token = data.access_token;
+        localStorage.setItem("token",token);
+        history.push({
+          pathname: "/game",
+          state: {
+            username: values.username,
+          }
+        });
+      } else {
+        message.error({
+          content: data.msg,
+          className: 'custom-class',
+          style: {
+            marginTop: '20vh'
+          }
+        });
+      }
     })
   }
 
