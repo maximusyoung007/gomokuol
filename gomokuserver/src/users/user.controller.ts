@@ -16,10 +16,21 @@ export class UserController {
     return this.userService.testCrossDomain();
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('findOne')
-  findOne(@Body() userDto: any): Promise<User> {
-    return this.userService.findOne(userDto.name);
+  async findOne(@Body() userDto: any): Promise<any> {
+    const u = await this.userService.findOne(userDto.name);
+    if (u === undefined) {
+      return {
+        code: 500,
+        msg: '没有找到该用户',
+      };
+    }
+    return {
+      code: 200,
+      msg: '找到用户',
+      data: u,
+    };
   }
 
   @Post('register')

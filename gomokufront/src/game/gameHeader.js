@@ -8,7 +8,6 @@ const GameHeader = () => {
     const [current,setCurrent] = useState("lobby");
 
     const handleClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
     };
 

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import { Form, Input, Tooltip, Select, Checkbox, Button,} from "antd";
+import {Form, Input, Tooltip, Select, Checkbox, Button, message,} from "antd";
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Agreement from "./agreement";
-import axios from 'axios';
-
+import axios from '../interceptor/interceptor';
+import ResponseData from '../interceptor/interceptor'
 
 const {Option} = Select;
 
@@ -71,6 +71,7 @@ const RegisterForm = () => {
         name="register"
         onFinish={onFinish}
         scrollToFirstError
+        //validateTrigger="onFinish"
       >
         <Form.Item
           name="email"
@@ -137,7 +138,24 @@ const RegisterForm = () => {
         </span>
           }
           rules={[
-            {required: true, message: '请输入用户名', whitespace: true}]}
+            {required: true, message: '请输入用户名', whitespace: true},
+            () => ({
+              async validator(_, value, callback) {
+                const data = await axios({
+                  method: 'post',
+                  url: 'user/findOne',
+                  data: {
+                    name: value
+                  }
+                });
+                if(data.code == 200) {
+                  return Promise.reject("该用户名已经被使用");
+                } else {
+                  return Promise.resolve();
+                }
+              }
+            })
+          ]}
         >
           <Input/>
         </Form.Item>
