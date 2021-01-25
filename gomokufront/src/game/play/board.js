@@ -7,6 +7,8 @@ class Board extends React.Component {
             onBoard: -1,
             clickTurn: 1,
             havePut: Array(625).fill(null),
+            black: Array(625).fill(null),
+            white: Array(625).fill(null)
         }
     }
 
@@ -121,9 +123,12 @@ class Board extends React.Component {
         }
     }
 
+    //落子
     putOn(e) {
         if(this.state.onBoard == 1) {
             const havePut = this.state.havePut;
+            const black = this.state.black;
+            const white = this.state.white;
             const c = document.getElementById("board");
             let ctx = c.getContext("2d");
             let x = e.pageX - c.getBoundingClientRect().left;
@@ -132,8 +137,8 @@ class Board extends React.Component {
                 for (let j = 0; j < 15; j++) {
                     let indexX = 22 + 44 * i;
                     let indexY = 22 + 44 * j;
-                    let s = indexX + "," + indexY;
-                    if(havePut.indexOf(s) == -1) {
+                    let point = indexX + "," + indexY;
+                    if(havePut.indexOf(point) == -1) {
                         if (Math.abs(x - indexX) < 22 && Math.abs(y - indexY) < 22) {
                             ctx.beginPath();
                             let radius = 22;
@@ -144,9 +149,19 @@ class Board extends React.Component {
                             if (this.state.clickTurn == 1) {
                                 ctx.strokeStyle = "black";
                                 ctx.fillStyle = "black";
+                                black.push(point);
+                                this.setState({
+                                    black: black
+                                })
+                                judge(indexX,indexY,black);
                             } else {
                                 ctx.strokeStyle = "black";
                                 ctx.fillStyle = "white";
+                                white.push(point);
+                                this.setState({
+                                    white: white
+                                })
+                                judge(indexX,indexY,white);
                             }
                             this.setState({clickTurn: this.state.clickTurn * (-1)});
                             ctx.fill();
