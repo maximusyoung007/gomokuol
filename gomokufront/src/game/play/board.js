@@ -1,4 +1,5 @@
 import React from "react"
+import * as judge from "./judge"
 
 class Board extends React.Component {
     constructor(props) {
@@ -60,7 +61,7 @@ class Board extends React.Component {
                 let x = 22 + i * 44;
                 let y = 22 + j * 44;
                 let s = x + "," + y;
-                if(havePut.indexOf(s) == -1) {
+                if(havePut.indexOf(s) === -1) {
                     const c = document.getElementById("board");
                     const context = c.getContext("2d");
                     this.drawIndex(context, x, y, "white");
@@ -101,7 +102,7 @@ class Board extends React.Component {
 
     whereToMove(e) {
         const havePut = this.state.havePut;
-        if(this.state.onBoard == 1) {
+        if(this.state.onBoard === 1) {
             const c = document.getElementById("board");
             let ctx = c.getContext("2d");
             let x = e.pageX - c.getBoundingClientRect().left;
@@ -111,7 +112,7 @@ class Board extends React.Component {
                     let indexX = 22 + 44 * i;
                     let indexY = 22 + 44 * j;
                     let s = indexX + "," + indexY;
-                    if (havePut.indexOf(s) == -1) {
+                    if (havePut.indexOf(s) === -1) {
                         if (Math.abs(x - indexX) < 22 && Math.abs(y - indexY) < 22) {
                             this.drawIndex(ctx,indexX,indexY,"red");
                         } else {
@@ -125,7 +126,7 @@ class Board extends React.Component {
 
     //落子
     putOn(e) {
-        if(this.state.onBoard == 1) {
+        if(this.state.onBoard === 1) {
             const havePut = this.state.havePut;
             const black = this.state.black;
             const white = this.state.white;
@@ -138,7 +139,7 @@ class Board extends React.Component {
                     let indexX = 22 + 44 * i;
                     let indexY = 22 + 44 * j;
                     let point = indexX + "," + indexY;
-                    if(havePut.indexOf(point) == -1) {
+                    if(havePut.indexOf(point) === -1) {
                         if (Math.abs(x - indexX) < 22 && Math.abs(y - indexY) < 22) {
                             ctx.beginPath();
                             let radius = 22;
@@ -146,14 +147,14 @@ class Board extends React.Component {
                             let endAngle = Math.PI + (Math.PI * 2) / 2;
                             let anticlockwise = true;
                             ctx.arc(indexX, indexY, radius, startAngle, endAngle, anticlockwise);
-                            if (this.state.clickTurn == 1) {
+                            if (this.state.clickTurn === 1) {
                                 ctx.strokeStyle = "black";
                                 ctx.fillStyle = "black";
                                 black.push(point);
                                 this.setState({
                                     black: black
                                 })
-                                judge(indexX,indexY,black);
+                                judge.judge(indexX,indexY,black);
                             } else {
                                 ctx.strokeStyle = "black";
                                 ctx.fillStyle = "white";
@@ -161,12 +162,12 @@ class Board extends React.Component {
                                 this.setState({
                                     white: white
                                 })
-                                judge(indexX,indexY,white);
+                                judge.judge(indexX,indexY,white);
                             }
                             this.setState({clickTurn: this.state.clickTurn * (-1)});
                             ctx.fill();
                             ctx.stroke();
-                            havePut.push(s);
+                            havePut.push(point);
                             this.setState({
                                 havePut: havePut
                             })
