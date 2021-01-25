@@ -3,7 +3,6 @@ import {Form, Input, Tooltip, Select, Checkbox, Button, message,} from "antd";
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Agreement from "./agreement";
 import axios from '../interceptor/interceptor';
-import ResponseData from '../interceptor/interceptor'
 
 const {Option} = Select;
 
@@ -33,7 +32,7 @@ const RegisterForm = () => {
   const [form] = Form.useForm();
   const [isShow,setIsShow] = useState(false);
 
-  const onFinish = (values: any) => {
+  const onFinish = (values) => {
     axios({
       method: 'post',
       url: 'user/register',
@@ -185,8 +184,9 @@ const RegisterForm = () => {
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            注册
           </Button>
+          <a href='/'>已有账号，直接登录</a>
         </Form.Item>
       </Form>
     </div>

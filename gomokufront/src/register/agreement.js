@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Modal,Button,Tag } from 'antd';
 
-const Agreement = (props: any) => {
-
-  console.log("来啦老弟");
-  console.log(props);
+const Agreement = (props) => {
 
   function closeModal() {
     props.setParentState();
