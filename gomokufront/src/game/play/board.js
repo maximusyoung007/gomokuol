@@ -1,4 +1,5 @@
 import React from "react"
+import { Modal } from 'antd'
 import * as judge from "./judge"
 
 class Board extends React.Component {
@@ -154,7 +155,9 @@ class Board extends React.Component {
                                 this.setState({
                                     black: black
                                 })
-                                judge.judge(indexX,indexY,black);
+                                if(judge.judge(indexX,indexY,black)) {
+                                    this.win();
+                                }
                             } else {
                                 ctx.strokeStyle = "black";
                                 ctx.fillStyle = "white";
@@ -162,7 +165,9 @@ class Board extends React.Component {
                                 this.setState({
                                     white: white
                                 })
-                                judge.judge(indexX,indexY,white);
+                                if(judge.judge(indexX,indexY,white)) {
+                                    this.lose();
+                                }
                             }
                             this.setState({clickTurn: this.state.clickTurn * (-1)});
                             ctx.fill();
@@ -178,6 +183,20 @@ class Board extends React.Component {
         }
     }
 
+    win() {
+        Modal.success({
+            title: '游戏结束',
+            content: '恭喜你获得胜利'
+        })
+    }
+
+    lose() {
+        Modal.warning({
+            title: '游戏结束',
+            content: '很遗憾你输了',
+        })
+    }
+
     render() {
         return(
             <div>
@@ -188,6 +207,7 @@ class Board extends React.Component {
                         onClick={(event) => this.putOn(event)}
                         width={660}
                         height={660}></canvas>
+
             </div>
         )
     }

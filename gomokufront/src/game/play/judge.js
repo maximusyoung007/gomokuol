@@ -96,7 +96,7 @@ export function judge(x,y,put) {
       }
     }
   }
-  for(let i = x, j = y;i >= 22 && j <= 652; i--, j++) {
+  for(let i = x, j = y;i >= 22 && j <= 652; i -= 44, j+= 44) {
     if(i !== x && j !== y) {
       let t = i + "," + j;
       if(put.indexOf(t) !== -1) {
@@ -106,7 +106,7 @@ export function judge(x,y,put) {
       }
     }
   }
-  if(count1 + count2 + 1 > 5) {
+  if(count1 + count2 + 1 >= 5) {
     return true;
   } else {
     return false;
