@@ -51,7 +51,7 @@ const data = [
 ];
 
 const LobbyPlayersList = (props) => {
-    const height = props.height;
+    const height = props.height - 100;
     return (
         <Table
             columns={columns}
