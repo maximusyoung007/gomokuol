@@ -63,5 +63,27 @@ footer {
 .playInfoButton {
     float: right;
 }
+.friends {
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    left: 0px;
+    width:100%;
+    background-color: white;
+}
+.friendsList {
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    left: 0px;
+    width: 30%
+}
+.friendInfo {
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    left: 30%;
+    width: 70%
+}
 
 
