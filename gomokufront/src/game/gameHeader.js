@@ -4,6 +4,8 @@ import { HomeOutlined, TeamOutlined, CommentOutlined, UserOutlined} from '@ant-d
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 
+require("./game.css");
+
 const GameHeader = () => {
     const [current,setCurrent] = useState("lobby");
 
@@ -14,7 +16,6 @@ const GameHeader = () => {
     let location = useLocation();
     let state = location.state;
     let username = state.username;
-    console.log("username" + username);
 
     const aboutMe = {
         pathname: '/game/aboutMe',
@@ -37,7 +38,7 @@ const GameHeader = () => {
     }
 
     return (
-        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+        <Menu style={{height: "50px"}} onClick={handleClick} selectedKeys={[current]} mode="horizontal">
             <span id={"title"}>gomoku online</span>
             <Menu.Item className={"menuItem"} key="aboutMe" icon={<UserOutlined />}>
                 <Link to={aboutMe}>关于我</Link>

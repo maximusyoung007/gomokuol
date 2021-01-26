@@ -50,7 +50,8 @@ const data = [
     },
 ];
 
-const LobbyPlayersList = () => {
+const LobbyPlayersList = (props) => {
+    const height = props.height;
     return (
         <Table
             columns={columns}
@@ -59,7 +60,7 @@ const LobbyPlayersList = () => {
             size={"small"}
             showHeader={false}
             title={() => '在线玩家'}
-            scroll={{y:600}}
+            scroll={{y:height}}
         ></Table>
     )
 }

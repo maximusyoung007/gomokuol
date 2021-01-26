@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Table,Space} from "antd"
 import {useLocation} from "react-router";
 import {Link} from "react-router-dom";
@@ -14,7 +14,7 @@ for (let i = 0; i < 20; i++) {
     });
 }
 
-const LobbyTables = () => {
+const LobbyTables = (props) => {
     const columns = [
         {
             title: '桌号',
@@ -67,7 +67,6 @@ const LobbyTables = () => {
             username:username
         }
     }
-
     const play2 = {
         pathname: "/game/play",
         state: {
@@ -76,12 +75,14 @@ const LobbyTables = () => {
         }
     }
 
+    const y1 = props.height - 100;
+
     return (
         <Table
             columns={columns}
             dataSource={data}
             pagination={false}
-            scroll={{y:580}}
+            scroll={{y:y1}}
             size={"middle"}>
         </Table>
     )

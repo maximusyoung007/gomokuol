@@ -6,7 +6,6 @@ import PlayInfo from "./playInfo";
 
 const Play = () => {
     let location = useLocation();
-    let state = location.state;
 
     return(
         <div>

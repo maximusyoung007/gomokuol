@@ -1,14 +1,14 @@
 .HolyGrail {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
+    height: 100%
 }
 
 header {
     background: #f5f7ff;
-    height: 55px;
     box-shadow: 0 6px 22px 4px rgba(7,48,114,.12)
 }
+
 footer {
     flex: 1;
 }
@@ -20,7 +20,10 @@ footer {
 
 }
 .HolyGrail-content {
-    height: 90vh;
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    left: 15%;
     width: 70%;
     margin: 0 auto;
     background: #9ce;
@@ -32,8 +35,10 @@ footer {
     font-size: 40px;
     padding-left: 5px;
 }
-.ant-table {
-    height: 80vh;
+.game-lobby {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
 }
 .ant-table-body {
     overflow: auto;
