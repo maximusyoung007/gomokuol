@@ -76,7 +76,8 @@ footer {
     top:0px;
     bottom: 0px;
     left: 0px;
-    width: 30%
+    width: 30%;
+    border-right: 1px solid rgb(240,240,240);
 }
 .friendInfo {
     position: absolute;
@@ -84,6 +85,16 @@ footer {
     bottom: 0px;
     left: 30%;
     width: 70%
+}
+.blankPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 90vh;
+    overflow: auto;
+    background: #f5f7ff;
 }
 
 

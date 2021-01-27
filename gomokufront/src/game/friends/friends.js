@@ -1,47 +1,32 @@
 import React from "react"
 import { Input, List, Avatar } from 'antd'
+import MenuList from "./menuList"
+import { Switch, Route } from "react-router-dom";
+import FriendInfo from "./friendInfo";
+import GroupInfo from "./groupInfo";
+import Blank from "./blank";
 
 require("../game.css");
 
-const data = [
-  {
-    title: '虚假的好友 1',
-  },
-  {
-    title: '虚假的好友 2',
-  },
-  {
-    title: '虚假的好友 3',
-  },
-  {
-    title: '虚假的好友 4',
-  },
-];
-
-const Friends = () => {
+const Friends = ({match}) => {
   const {Search} = Input;
   const onSearch = value => {
     console.log(value);
   }
   return(
     <div className={"friends"}>
-      <div className={"friendsList"}>
+      <div className={"friendsList"} style={{overflowY: "auto"}}>
         <Search placeholder="input search text" onSearch={onSearch} enterButton />
-        <List
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={item => (
-            <List.Item>
-
-              <Avatar shape={"square"} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-              <span style={{float: "left"}}>{item.title}</span>
-
-            </List.Item>
-          )}
-        />
+        <MenuList></MenuList>
       </div>
       <div className={"friendInfo"}>
-
+        <Switch>
+          <Switch>
+            <Route exact path={`${match.url}`} component={Blank}/>
+            <Route path={`${match.url}/groupInfo`} component={GroupInfo}/>
+            <Route path={`${match.url}/friendInfo`} component={FriendInfo}/>
+          </Switch>
+        </Switch>
       </div>
     </div>
   )

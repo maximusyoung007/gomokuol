@@ -15,26 +15,21 @@ const GameHeader = () => {
 
     let location = useLocation();
     let state = location.state;
-    let username = state.username;
 
     const aboutMe = {
         pathname: '/game/aboutMe',
-        state: { username: username }
     }
 
     const message = {
         pathname: '/game/message',
-        state: { username: username }
     }
 
     const friends = {
         pathname: '/game/friends',
-        state: { username: username }
     }
 
     const lobby = {
         pathname: '/game/lobby',
-        state: { username: username }
     }
 
     return (

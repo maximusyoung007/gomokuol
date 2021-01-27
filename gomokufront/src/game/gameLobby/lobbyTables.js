@@ -59,19 +59,16 @@ const LobbyTables = (props) => {
         },
     ];
     let location = useLocation();
-    let username = location.state.username;
     const play = {
         pathname:"/game/play",
         state: {
             purpose:1,
-            username:username
         }
     }
     const play2 = {
         pathname: "/game/play",
         state: {
             purpose:2,
-            username:username
         }
     }
 

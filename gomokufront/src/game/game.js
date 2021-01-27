@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Link, Route, Switch} from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import GameHeader from "./gameHeader"
 import Lobby from "./gameLobby/gameLobby";
 import Messages from "./message/messages";
