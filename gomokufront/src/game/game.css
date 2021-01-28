@@ -71,7 +71,7 @@ footer {
     width:100%;
     background-color: white;
 }
-.friendsList {
+.connectList {
     position: absolute;
     top:0px;
     bottom: 0px;
@@ -79,7 +79,7 @@ footer {
     width: 30%;
     border-right: 1px solid rgb(240,240,240);
 }
-.friendInfo {
+.connectInfo {
     position: absolute;
     top:0px;
     bottom: 0px;
@@ -94,7 +94,26 @@ footer {
     margin: 0 auto;
     height: 90vh;
     overflow: auto;
-    background: #f5f7ff;
+    background: white;
+}
+.groupInfo {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+.groupAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 70vh;
+    overflow: auto;
+    background: white;
+}
+.operateGroup {
+    text-align: center;
 }
 
 

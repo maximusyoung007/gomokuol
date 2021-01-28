@@ -15,11 +15,11 @@ const Friends = ({match}) => {
   }
   return(
     <div className={"friends"}>
-      <div className={"friendsList"} style={{overflowY: "auto"}}>
+      <div className={"connectList"} style={{overflowY: "auto"}}>
         <Search placeholder="input search text" onSearch={onSearch} enterButton />
         <MenuList></MenuList>
       </div>
-      <div className={"friendInfo"}>
+      <div className={"connectInfo"}>
         <Switch>
           <Switch>
             <Route exact path={`${match.url}`} component={Blank}/>
