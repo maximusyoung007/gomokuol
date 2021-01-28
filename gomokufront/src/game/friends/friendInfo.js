@@ -1,10 +1,9 @@
 import React from "react";
 import {useLocation} from "react-router";
 import testAvatar from './avatar.png'
-import FemaleSvg from "./female.svg";
 import Icon from '@ant-design/icons';
 
-const HeartSvg = () => (
+const FemaleSvg = () => (
   <svg t="1611825613734" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
        p-id="24594" width="200" height="200">
     <defs>
@@ -20,7 +19,7 @@ const HeartSvg = () => (
 
 );
 
-const HeartIcon = props => <Icon component={HeartSvg} {...props} />;
+const FemaleIcon = props => <Icon component={FemaleSvg} {...props} />;
 
 
 const FriendInfo = () => {
@@ -34,7 +33,7 @@ const FriendInfo = () => {
         </div>
         <div className={"nickNameArea"}>
           <h4 className={"nickname"}>JayZhou周杰伦</h4>
-          <HeartIcon/>
+          <FemaleIcon/>
         </div>
         <div className={"meta-area"}>
           <div className={"meta-area-item"}>
