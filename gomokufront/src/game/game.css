@@ -115,5 +115,40 @@ footer {
 .operateGroup {
     text-align: center;
 }
+.friendInfo {
+    position: absolute;
+    top: 10%;
+    bottom: 0px;
+    width: 100%;
+}
+.friendAvatar {
+    margin-bottom: 20px;
+}
+.nickname {
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.profile {
+    padding: 80px 0;
+    text-align: center;
+}
+.meta-area-item {
+    float: left;
+    padding-left: 40%;
+}
+.friend-label {
+    float: left;
+    font-size: 12px;
+    color: #888;
+    margin-right: 10px;
+}
+.friend-p {
+    float: left;
+    font-size: 12px;
+    color: #888;
+}
+
 
 
