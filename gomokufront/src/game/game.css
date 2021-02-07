@@ -63,7 +63,7 @@ footer {
 .playInfoButton {
     float: right;
 }
-.friends {
+.friends{
     position: absolute;
     top:0px;
     bottom: 0px;
@@ -71,7 +71,7 @@ footer {
     width:100%;
     background-color: white;
 }
-.connectList {
+.connectList{
     position: absolute;
     top:0px;
     bottom: 0px;
@@ -84,7 +84,14 @@ footer {
     top:0px;
     bottom: 0px;
     left: 30%;
-    width: 70%
+    width: 70%;
+}
+.messageInfo {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 30%;
+    width: 70%;
 }
 .blankPage {
     display: flex;
@@ -95,6 +102,7 @@ footer {
     height: 90vh;
     overflow: auto;
     background: white;
+
 }
 .groupInfo {
     position: absolute;
@@ -153,6 +161,179 @@ footer {
     font-size: 12px;
     color: #888;
 }
+.messages{
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    left: 0px;
+    width:100%;
+    background-color: white;
+}
+.messagesList{
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    left: 0px;
+    width: 30%;
+    border-right: 1px solid rgb(240,240,240);
+}
+.messageInfo {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 30%;
+}
+/*聊天框title*/
+.box_hd {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: 30px;
+}
+.box_hd .title_wrap {
+    position: relative;
+    margin: 0 19px;
+    border-bottom: 1px solid #d6d6d6;
+    z-index: 1024;
+}
+.box_hd .title {
+    font-weight: 400;
+    height: 25px;
+    display: inline-block;
+    font-size: 12px;
+}
+.box_hd .title_name {
+    /*display: inline-block;*/
+    vertical-align: center;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+}
+/*聊天信息*/
+.chat {
+    position: absolute;
+    bottom: 180px;
+    overflow: scroll!important;
+    padding: 0!important;
+    left: 0;
+    right: 0;
+    top: 30px;
+}
+.chat-bd {
+    padding: 0 19px;
+}
+.scope {
 
+}
+.message-me {
+    float: right;
+    text-align: right;
+    clear: right;
+    margin-bottom: 16px;
+}
+.message-me-avatar {
+    float: right;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 2px;
+    cursor: pointer;
+}
+.content-me {
+    overflow: hidden;
+}
+.bubble-content {
+    background-color: #b2e281;
+    max-height: 500px;
+    min-height: 1em;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    text-align: left;
+    font-size: 14px;
+    -webkit-border-radius: 3px;
+    margin: 0 10px;
+}
+.bubble-content::after {
+    border-left-color: #b2e281;
+    border-left-width: 4px;
+    left: 100%;
+    position: absolute;
+    top:14px;
+    border: 6px solid transparent;
+    content: " ";
+}
+.bubble-content::before {
+    position: absolute;
+    top: 14px;
+    border: 6px solid transparent;
+    content: " ";
+    left: 100%;
+}
+.bubble {
+    word-break: break-all;
+    min-height: 25px;
+}
+.plain {
+    padding: 9px 13px;
+}
+.message-plain {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+
+
+/*聊天框底部*/
+.chat-box-foot {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    margin-left: 19px;
+    margin-right: 19px;
+    border-top: 1px solid #d6d6d6;
+}
+/*表情、截图、文件*/
+.toolbar {
+    height: 30px;
+}
+/*输入框*/
+.editArea {
+    height: 7em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 12px;
+    outline: none;
+    border: 0;
+    font-size: 14px;
+}
+.editArea {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: normal;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+}
+.chat-box-foot .action {
+    text-align: right;
+    margin-top: 5px;
+}
+.desc {
+    color: #888888;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-right: 7px
+}
 
 

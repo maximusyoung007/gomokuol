@@ -20,13 +20,11 @@ const Friends = ({match}) => {
         <MenuList></MenuList>
       </div>
       <div className={"connectInfo"}>
-        <Switch>
           <Switch>
             <Route exact path={`${match.url}`} component={Blank}/>
             <Route path={`${match.url}/groupInfo`} component={GroupInfo}/>
             <Route path={`${match.url}/friendInfo`} component={FriendInfo}/>
           </Switch>
-        </Switch>
       </div>
     </div>
   )
