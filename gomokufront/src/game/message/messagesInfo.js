@@ -6,7 +6,128 @@ import others from './others.jpeg';
 
 require('../game.css')
 
-const MessageInfo = () => {
+
+const messageInfo = [
+  {
+    "key": 5,
+    "title": "me",
+    'chatContent': '你好'
+  },
+  {
+    "key": 6,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 7,
+    "title": "me",
+    'chatContent': '你好'
+  },
+  {
+    "key": 8,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 9,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 10,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 11,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 12,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 13,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 14,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 15,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 16,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 17,
+    "title": "周杰伦",
+    'chatContent': '你好'
+  },
+  {
+    "key": 18,
+    "title": "周杰伦18",
+    'chatContent': '你好'
+  },
+  {
+    "key": 19,
+    "title": "周杰伦18",
+    'chatContent': '你好'
+  },
+  {
+    "key": 20,
+    "title": "周杰伦18",
+    'chatContent': '你好'
+  },
+  {
+    "key": 21,
+    "title": "周杰伦18",
+    'chatContent': '你好'
+  },
+]
+
+const MessageInfo = (props) => {
+  const messageList = messageInfo.map((chat) =>
+    chat.title === "me" ?
+    <div key={chat.key} className={'message-me'}>
+      <img className={'message-me-avatar'} src={myAvatar}/>
+      <div className={'content-me'}>
+        <div className={'bubble-content'}>
+          <div className={'bubble'}>
+            <div className={'plain'}>
+              <div className={'message-plain'}>
+                {chat.chatContent}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> :
+      <div key={chat.key} className={'message-others'}>
+        <img className={'message-others-avatar'} src={others}/>
+        <div className={"content-others"}>
+          <h4 className={'other-names'}>{chat.title}</h4>
+          <div className={'bubble-content-others'}>
+            <div className={'bubble-others'}>
+              <div className={'plain-others'}>
+                <div className={'message-plain-others'}>
+                  {chat.chatContent}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  )
   return(
     <div>
       <div className={'box_hd'}>
@@ -21,161 +142,7 @@ const MessageInfo = () => {
       <div className={'chat'}>
         <div className={'chat-bd'}>
           <div className={'scope'}>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-others'}>
-              <img className={'message-others-avatar'} src={others}/>
-              <div className={"content-others"}>
-                <h4 className={'other-names'}>周杰伦</h4>
-                <div className={'bubble-content-others'}>
-                  <div className={'bubble-others'}>
-                    <div className={'plain-others'}>
-                      <div className={'message-plain-others'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={'message-me'}>
-              <img className={'message-me-avatar'} src={myAvatar}/>
-              <div className={'content-me'}>
-                <div className={'bubble-content'}>
-                  <div className={'bubble'}>
-                    <div className={'plain'}>
-                      <div className={'message-plain'}>
-                        你好
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {messageList}
           </div>
         </div>
       </div>
