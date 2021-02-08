@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button } from "antd";
-import { SmileOutlined, FolderOutlined, ScissorOutlined } from '@ant-design/icons'
-import myAvatar from './avatar.jpg'
+import { SmileOutlined, FolderOutlined, ScissorOutlined } from '@ant-design/icons';
+import myAvatar from './avatar.jpg';
+import others from './others.jpeg';
 
 require('../game.css')
 
@@ -27,6 +28,21 @@ const MessageInfo = () => {
                   <div className={'bubble'}>
                     <div className={'plain'}>
                       <div className={'message-plain'}>
+                        你好
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={'message-others'}>
+              <img className={'message-others-avatar'} src={others}/>
+              <div className={"content-others"}>
+                <h4 className={'other-names'}>周杰伦</h4>
+                <div className={'bubble-content-others'}>
+                  <div className={'bubble-others'}>
+                    <div className={'plain-others'}>
+                      <div className={'message-plain-others'}>
                         你好
                       </div>
                     </div>
