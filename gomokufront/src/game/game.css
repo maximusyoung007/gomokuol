@@ -275,6 +275,7 @@ footer {
     border: 6px solid transparent;
     content: " ";
     border-right-color: rgb(226,226,226);
+    border-right-width: 3px;
 }
 /*.bubble-content::before {*/
 /*    position: absolute;*/
@@ -398,6 +399,12 @@ footer {
     font-size: 12px;
     margin-left: 10px;
     margin-right: 7px
+}
+
+/*对战信息页面*/
+.score {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
