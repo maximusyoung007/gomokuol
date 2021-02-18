@@ -5,12 +5,9 @@ import { UserModule } from './users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { User } from './entity/user.entity';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './users/user.service';
-import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './auth/constants';
 import { UserController } from './users/user.controller';
+import { ChatModule } from './chat/chat.module';
 
 /**
  * 应用程序根模块
@@ -30,6 +27,7 @@ import { UserController } from './users/user.controller';
     }),
     AuthModule,
     UserModule,
+    ChatModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService],
