@@ -1,13 +1,28 @@
 import React from "react"
-import { io } from 'socket.io-client';
-const socket = io('ws://localhost:80')
-
+import { io, Manager } from 'socket.io-client';
+import {Button} from "antd";
+const manager = new Manager("ws://127.0.0.1:801", {
+  transports: ['websocket']
+});
+const socket = manager.socket("events")
+// const socket = io('ws://127.0.0.1:801', {
+//   path: '/socket.io'
+// });
 const AboutMe = () => {
-  socket.emit('chat', {name: 'abc'}, data => console.log(data));
+  const testws = () => {
+    console.log("测试wbsocket");
+    // const socket = new WebSocket("ws://127.0.0.1:801");
+    // socket.addEventListener('open', function (event) {
+    //   socket.send('hello server');
+    // })
+    socket.emit('events', {name: 'nest'}, data => console.log(data));
+  }
 
   return(
     <div>
-        about me
+      <Button onClick={testws}>
+        测试socket
+      </Button>
     </div>
   )
 }

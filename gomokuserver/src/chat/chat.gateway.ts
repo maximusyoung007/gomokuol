@@ -1,18 +1,28 @@
 import {
   ConnectedSocket,
-  MessageBody,
+  MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit,
   SubscribeMessage,
-  WebSocketGateway,
+  WebSocketGateway, WebSocketServer,
 } from '@nestjs/websockets';
-import { Socket } from 'socket.io';
 
-@WebSocketGateway(80, { namespace: '/chat'})
-export class ChatGateway {
-  @SubscribeMessage('chat')
-  handleChat(
+@WebSocketGateway(801)
+export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
+  @WebSocketServer() server;
+  afterInit(server: any) {
+    console.log('Initialized');
+  }
+
+  @SubscribeMessage('events')
+  chat (
     @MessageBody() data: string,
-    @ConnectedSocket() client: Socket,
   ): string {
+    console.log(data);
     return data;
+  }
+
+  handleConnection(client: any, ...args: any[]): any {
+  }
+
+  handleDisconnect(client: any): any {
   }
 }
