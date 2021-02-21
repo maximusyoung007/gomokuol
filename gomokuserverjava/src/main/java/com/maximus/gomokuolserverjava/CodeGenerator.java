@@ -37,10 +37,11 @@ public class CodeGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath =  System.getProperty("user.dir") + "/base-service";
+        String projectPath =  System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("ZW");
+        gc.setAuthor("maximus");
         gc.setOpen(false);
+        gc.setServiceName("%sService");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -56,14 +57,14 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("");
+        //pc.setModuleName("");
         pc.setParent("com.maximus.gomokuolserverjava");
 
         String p = scanner("模块名");
-        pc.setEntity("entity." + p);
-        pc.setMapper("mapper." + p);
-        pc.setService("service." + p);
-        pc.setServiceImpl("serviceImpl." + p);
+        pc.setEntity("entity");
+        pc.setMapper("mapper");
+        pc.setService("service");
+        pc.setServiceImpl("service.serviceImpl");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -79,8 +80,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return projectPath + "/src/main/resources/mapper/" +p+ pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return  projectPath + "/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
