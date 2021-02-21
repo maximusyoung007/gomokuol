@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.maximus.gomokuolserverjava.entity.User;
 import com.maximus.gomokuolserverjava.mapper.UserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.maximus.gomokuolserverjava.service.UserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-02-21
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IService<User> {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
 }
