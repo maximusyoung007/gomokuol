@@ -40,5 +40,4 @@ public class User implements Serializable {
 
     private String email;
 
-
 }

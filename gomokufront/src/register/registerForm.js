@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import {Form, Input, Tooltip, Select, Checkbox, Button, message,} from "antd";
+import {Form, Input, Tooltip, Select, Checkbox, Button, message, Modal,} from "antd";
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import Agreement from "./agreement";
 import axios from '../interceptor/interceptor';
+import {useHistory} from "react-router";
 
 const {Option} = Select;
 
@@ -28,9 +29,10 @@ const tailFormItemLayout = {
     },
   },
 };
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const [form] = Form.useForm();
   const [isShow,setIsShow] = useState(false);
+  let history = useHistory();
 
   const onFinish = (values) => {
     axios({
@@ -44,9 +46,23 @@ const RegisterForm = () => {
         mobile: values.phone
       }
     }).then(function (data) {
-      console.log(data);
+      if (data.code == 200) {
+        message.success({
+          content: '注册成功,即将返回登录页',
+          style: {
+            marginTop: '25vh'
+          },
+          duration: 2,
+          onClose: setTimeout(backToLoginPage, 3000)
+        });
+      }
     })
   };
+
+  //注册成功，返回登录页面
+  const backToLoginPage = () => {
+    history.push("/");
+  }
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -147,7 +163,8 @@ const RegisterForm = () => {
                     name: value
                   }
                 });
-                if(data.code == 200) {
+                console.log(data);
+                if(data.code != 200) {
                   return Promise.reject("该用户名已经被使用");
                 } else {
                   return Promise.resolve();
@@ -161,10 +178,19 @@ const RegisterForm = () => {
 
         <Form.Item
           name="phone"
-          label="电话号码"
-          rules={[{required: true, message: 'Please input your phone number!'}]}
+          label="手机号码"
+          rules={[
+            {
+              required: true,
+              message: '请输入手机号码!'
+            },
+            {
+              pattern: /^1[3|4|5|7|8][0-9]\d{8}$/,
+              message: '请输入正确的手机号'
+            }
+          ]}
         >
-          <Input addonBefore={prefixSelector} style={{width: '100%'}}/>
+          <Input/>
         </Form.Item>
 
         <Form.Item

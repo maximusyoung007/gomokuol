@@ -30,7 +30,7 @@ public class Result<T> {
     }
 
     public static<T> Result<T> success(String message) {
-        return new Result<>(ResultType.ERROR.getCode(), message, true);
+        return new Result<>(ResultType.SUCCESS.getCode(), message, true);
     }
 
     public static<T> Result<T> error(String message) {
