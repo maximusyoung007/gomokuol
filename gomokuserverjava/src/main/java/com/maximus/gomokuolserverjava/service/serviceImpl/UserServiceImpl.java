@@ -1,11 +1,14 @@
 package com.maximus.gomokuolserverjava.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maximus.gomokuolserverjava.entity.User;
 import com.maximus.gomokuolserverjava.mapper.UserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maximus.gomokuolserverjava.service.UserService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -17,5 +20,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    @Resource
+    private UserMapper userMapper;
 
+    @Override
+    public User findByUsername(User user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", user.getName());
+        return userMapper.selectOne(queryWrapper);
+    }
 }

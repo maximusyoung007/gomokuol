@@ -11,7 +11,7 @@ const LoginForm = () => {
       method: 'post',
       url: 'user/login',
       data:{
-        username: values.username,
+        name: values.username,
         password: values.password
       }
     }).then(function(data){
@@ -26,7 +26,7 @@ const LoginForm = () => {
         });
       } else {
         message.error({
-          content: data.msg,
+          content: data.message,
           className: 'custom-class',
           style: {
             marginTop: '20vh'

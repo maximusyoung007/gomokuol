@@ -1,108 +1,62 @@
 package com.maximus.gomokuolserverjava.util;
 
-import com.maximus.gomokuolserverjava.entity.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class JwtUtil {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
-    private static final String CLAIM_KEY_USERNAME = "sub";
-    private static final String CLAIM_KEY_CREATED = "created";
-    @Value("${jwt.secret}")
-    private String secret;
-    @Value("${jwt.expiration}")
-    private long expiration;
+
+    private static final Long EXPIRE_TIME = 5 * 60 * 1000L;
+
+    private static final String SECRET = "mySecret";
 
     /**
      * 生成token
+     * @param username
+     * @return
      */
-    private String generateToken(Map<String, Object> claims) {
-        return Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+    public static String createToken(String username) {
+        String token = null;
+        //过期时间
+        Date expireDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        //加密算法
+        Algorithm algorithm = Algorithm.HMAC256(SECRET);
+        token = JWT.create().withClaim("username", username).withExpiresAt(expireDate).sign(algorithm);
+        return token;
     }
 
     /**
-     * 根据用户信息生成token
+     * 验证token
      */
-    public String generateToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, user.getName());
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
-    }
-
-    /**
-     * 从token中获取JWT的负载
-     */
-    private Claims getClaimsFromToken(String token) {
-        Claims claims = null;
+    public static boolean verify(String token, String username) {
         try {
-            claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            Algorithm algorithm = Algorithm.HMAC256(SECRET);
+            JWTVerifier verifier = JWT.require(algorithm).withClaim("username", username).build();
+            verifier.verify(token);
+            return true;
         } catch (Exception e) {
-            logger.error("jwt格式验证失败");
+            logger.error("token is invalid.{}", e.getMessage());
+            return false;
         }
-        return claims;
     }
 
     /**
-     * token过期时间
+     * 从token中获取username
      */
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
-    }
-
-    /**
-     *从token中获取登录用户名
-     */
-    public String getUsernameFromToken(String token) {
-        String username;
+    public static String getUsernameFromToken(String token) {
         try {
-            Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch(Exception e) {
-            username = null;
+            DecodedJWT decode = JWT.decode(token);
+            String username = decode.getClaim("username").asString();
+            return username;
+        } catch (Exception e) {
+            logger.error("fail to decode jwt", e.getMessage());
+            return null;
         }
-        return username;
-    }
-
-    /**
-     * 验证token是否有效
-     */
-    public boolean validateUser(String token, User user) {
-        String username = getUsernameFromToken(token);
-        return username.equals(user.getName()) && isTokenExpired(token);
-    }
-
-    /**
-     * 判断token是否过期
-     */
-    private boolean isTokenExpired(String token) {
-        Claims claims = getClaimsFromToken(token);
-        Date expiredDate = claims.getExpiration();
-        return expiredDate.before(new Date());
-    }
-
-    /**
-     * 判断token是否可以被刷新
-     */
-    public boolean canRefresh(String token) {
-        return !isTokenExpired(token);
-    }
-
-    /**
-     * 刷新token
-     */
-    public String refreshToken(String token) {
-        Claims claims = getClaimsFromToken(token);
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
     }
 }

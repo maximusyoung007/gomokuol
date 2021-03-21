@@ -83,12 +83,6 @@
             <version>1.7.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot-web-starter</artifactId>
-            <version>1.7.1</version>
-        </dependency>
-
         <!--JWT-->
         <dependency>
             <groupId>com.auth0</groupId>

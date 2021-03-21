@@ -7,16 +7,14 @@ import com.maximus.gomokuolserverjava.dto.UserDto;
 import com.maximus.gomokuolserverjava.entity.User;
 import com.maximus.gomokuolserverjava.result.Result;
 import com.maximus.gomokuolserverjava.service.UserService;
+import com.maximus.gomokuolserverjava.util.JwtUtil;
 import com.maximus.gomokuolserverjava.util.ShiroUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -43,13 +41,17 @@ public class UserController {
      */
     @PostMapping("login")
     @ResponseBody
-    public JSONObject login(@RequestBody User user) {
-        JSONObject outJson = new JSONObject();
-        List<User> userList = userService.list();
-        User user1 = userList.get(0);
-        outJson.put("user", user1);
-        outJson.put("code", 200);
-        return outJson;
+    public Result login(@RequestBody User user) {
+        User user1 = userService.findByUsername(user);
+        if (null == user1) {
+            return Result.error("没有此账号");
+        }
+        else if (user.getPassword().equals(user1.getPassword())) {
+            return Result.error("账号或者密码错误");
+        }
+        JSONObject json = new JSONObject();
+        json.put("access_token", JwtUtil.createToken(user1.getName()));
+        return Result.success(json, "登录成功");
     }
 
     /**
@@ -98,6 +100,12 @@ public class UserController {
             return Result.success("注册成功");
         }
         return Result.error("注册失败");
+    }
+
+    @ResponseBody
+    @GetMapping("/unauthorized/{message}")
+    public Result unauthorized(@PathVariable String message) {
+        return Result.error(message);
     }
 }
 
