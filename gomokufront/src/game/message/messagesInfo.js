@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Button } from "antd";
 import { SmileOutlined, FolderOutlined, ScissorOutlined } from '@ant-design/icons';
 import myAvatar from './avatar.jpg';
 import others from './others.jpeg';
+
 
 require('../game.css')
 
@@ -96,6 +97,25 @@ const messageInfo = [
 ]
 
 const MessageInfo = (props) => {
+  var ws;
+  useEffect(() => {
+    ws = new WebSocket("ws://localhost:7002/websocket/admin");
+  })
+  function sendMessage(value) {
+    var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
+    ws.onopen = function () {
+      console.log('连接成功');
+    }
+    ws.onmessage = function (message) {
+      var received_msg = JSON.parse(message.data);
+      if (editContent) {
+        ws.send(editContent);
+      }
+    }
+    // ws.onclose = function () {
+    //   console.log("连接已关闭");
+    // }
+  }
   const messageList = messageInfo.map((chat) =>
     chat.title === "me" ?
     <div key={chat.key} className={'message-me'}>
@@ -155,7 +175,7 @@ const MessageInfo = (props) => {
         <pre className={'editArea'}></pre>
         <div className={'action'}>
           <span className={'desc'}>按下cmd+enter换行</span>
-          <Button>发送</Button>
+          <Button onClick={() => sendMessage()}>发送</Button>
         </div>
       </div>
     </div>
