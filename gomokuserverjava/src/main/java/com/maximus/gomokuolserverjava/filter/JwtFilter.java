@@ -16,7 +16,7 @@ import java.net.URLEncoder;
 public class JwtFilter extends BasicHttpAuthenticationFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
     /**
-     * 判断请求头中是否有token
+     * 判断请求头中是否有token,如果没有token，表示当前是登录
      * @param request
      * @return
      */

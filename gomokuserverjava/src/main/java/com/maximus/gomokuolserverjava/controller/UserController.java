@@ -4,6 +4,7 @@ package com.maximus.gomokuolserverjava.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maximus.gomokuolserverjava.dto.UserDto;
+import com.maximus.gomokuolserverjava.entity.Relations;
 import com.maximus.gomokuolserverjava.entity.User;
 import com.maximus.gomokuolserverjava.result.Result;
 import com.maximus.gomokuolserverjava.service.UserService;
@@ -106,6 +107,14 @@ public class UserController {
     @GetMapping("/unauthorized/{message}")
     public Result unauthorized(@PathVariable String message) {
         return Result.error(message);
+    }
+
+    //获取用户好友列表
+    @GetMapping("getFriendList")
+    @ResponseBody
+    public Result getFriendList(@RequestBody UserDto userDto) {
+        List<User> friendsList = userService.getFriendsList(userDto);
+        return Result.success(friendsList, "成功");
     }
 }
 

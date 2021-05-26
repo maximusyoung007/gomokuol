@@ -1,7 +1,10 @@
 package com.maximus.gomokuolserverjava.service;
 
+import com.maximus.gomokuolserverjava.dto.UserDto;
 import com.maximus.gomokuolserverjava.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
     User findByUsername(User user);
+
+    List<User> getFriendsList(UserDto userDto);
 }
