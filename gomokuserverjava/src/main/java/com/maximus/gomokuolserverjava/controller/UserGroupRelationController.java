@@ -7,15 +7,15 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- * 用户关系表 前端控制器
+ * 用户和所属群的关系 前端控制器
  * </p>
  *
  * @author maximus
- * @since 2021-05-26
+ * @since 2021-05-27
  */
 @Controller
-@RequestMapping("/relations")
-public class RelationsController {
+@RequestMapping("/userGroupRelation")
+public class UserGroupRelationController {
 
 }
 
