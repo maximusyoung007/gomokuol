@@ -21,13 +21,13 @@ public class JwtUtil {
      * @param username
      * @return
      */
-    public static String createToken(String username) {
+    public static String createToken(String username, String userId) {
         String token = null;
         //过期时间
         Date expireDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         //加密算法
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
-        token = JWT.create().withClaim("username", username).withExpiresAt(expireDate).sign(algorithm);
+        token = JWT.create().withClaim("username", username).withClaim("userId", userId).withExpiresAt(expireDate).sign(algorithm);
         return token;
     }
 
@@ -54,6 +54,20 @@ public class JwtUtil {
             DecodedJWT decode = JWT.decode(token);
             String username = decode.getClaim("username").asString();
             return username;
+        } catch (Exception e) {
+            logger.error("fail to decode jwt", e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * 从token中获取userId
+     */
+    public static String getUserIdFromToken(String token) {
+        try {
+            DecodedJWT decodedJWT = JWT.decode(token);
+            String userId = decodedJWT.getClaim("userId").asString();
+            return userId;
         } catch (Exception e) {
             logger.error("fail to decode jwt", e.getMessage());
             return null;

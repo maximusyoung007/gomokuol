@@ -9,8 +9,8 @@
         WHERE
             id in
             (
-                SELECT userId2 FROM relations
-                WHERE userId1 = #{id}
+                SELECT user_id2 FROM relations
+                WHERE user_id1 = #{id}
             )
     </select>
 </mapper>

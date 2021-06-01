@@ -9,15 +9,16 @@ const LoginForm = () => {
   const onFinish = (values) => {
     axios({
       method: 'post',
-      url: 'user/login',
+      url: 'login',
       data:{
         name: values.username,
         password: values.password
       }
     }).then(function(data){
       if(data.code == 200) {
-        let token = data.access_token;
+        let token = data.data.access_token;
         localStorage.setItem("token",token);
+        console.log(localStorage.getItem("token"));
         history.push({
           pathname: "/game",
           state: {

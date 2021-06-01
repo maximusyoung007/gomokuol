@@ -1,48 +1,40 @@
 import React, {Component} from 'react';
-import {Avatar, Menu} from "antd";
+import {Avatar, Menu, message} from "antd";
 import { UserOutlined } from '@ant-design/icons'
 import {Link} from "react-router-dom";
+import axios from "../../interceptor/interceptor";
 
 
 const { SubMenu } = Menu;
 
-const data = [
+let data1 = [
   {
-    "key": 1,
-    "icon": "appstore",
     "title": "群聊",
     "pathname": "",
     "children": [
       {
-        "key": 3,
         "title": "你问我爱你有多深",
         "pathname": "/game/friends/groupInfo",
       },
       {
-        "key": 4,
         "title": "我依然爱你那么深",
         "pathname": "/game/friends/groupInfo",
       }
     ],
   },
   {
-    "key": 2,
-    "icon": "setting",
     "title": "好友",
     "pathname": "",
-    children: [
+    "children": [
       {
-        "key": 5,
+        "title": "周杰伦",
+        "pathname": "t",
+      },
+      {
         "title": "周杰伦",
         "pathname": "/game/friends/friendInfo",
       },
       {
-        "key": 6,
-        "title": "周杰伦",
-        "pathname": "/game/friends/friendInfo",
-      },
-      {
-        "key": 7,
         "title": "周杰伦",
         "pathname": "/game/friends/friendInfo",
       },
@@ -108,7 +100,18 @@ const data = [
 class MenuList extends Component {
   constructor(props) {
     super(props);
+    axios({
+      method: 'post',
+      url: 'user/getFriendList',
+      data:{
+
+      }
+    }).then(function(data){
+      data1 = data;
+      console.log(data);
+    })
   }
+
 
   recrusion(dataSource) {
     return(
@@ -135,7 +138,7 @@ class MenuList extends Component {
 
     return (
       <Menu mode="inline" style={{ width: '100%' }}>
-        {this.recrusion(data)}
+        {this.recrusion(data1)}
       </Menu>
     )
   }

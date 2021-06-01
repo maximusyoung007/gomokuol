@@ -32,28 +32,9 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Resource
     private UserService userService;
-
-    /**
-     * 登录
-     * @param user
-     * @return
-     */
-    @PostMapping("login")
-    @ResponseBody
-    public Result login(@RequestBody User user) {
-        User user1 = userService.findByUsername(user);
-        if (null == user1) {
-            return Result.error("没有此账号");
-        }
-        else if (user.getPassword().equals(user1.getPassword())) {
-            return Result.error("账号或者密码错误");
-        }
-        JSONObject json = new JSONObject();
-        json.put("access_token", JwtUtil.createToken(user1.getName()));
-        return Result.success(json, "登录成功");
-    }
 
     /**
      * 验证用户名是否合法
@@ -109,12 +90,5 @@ public class UserController {
         return Result.error(message);
     }
 
-    //获取用户好友列表
-    @GetMapping("getFriendList")
-    @ResponseBody
-    public Result getFriendList(@RequestBody UserDto userDto) {
-        List<User> friendsList = userService.getFriendsList(userDto);
-        return Result.success(friendsList, "成功");
-    }
 }
 
