@@ -17,8 +17,8 @@ const LoginForm = () => {
     }).then(function(data){
       if(data.code == 200) {
         let token = data.data.access_token;
-        localStorage.setItem("token",token);
-        console.log(localStorage.getItem("token"));
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", values.username);
         history.push({
           pathname: "/game",
           state: {

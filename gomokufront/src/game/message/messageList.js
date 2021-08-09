@@ -97,6 +97,16 @@ const data = [
 class MessageList extends Component {
   constructor(props) {
     super(props);
+    axios({
+      method: 'post',
+      url: 'messagePerson/getMessagePerson',
+      data:{
+        "from": localStorage.getItem("username")
+      }
+    }).then(function(data){
+      data1 = data;
+      console.log(data);
+    })
   }
 
   recrusion(dataSource) {

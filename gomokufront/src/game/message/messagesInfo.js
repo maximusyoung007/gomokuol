@@ -97,6 +97,7 @@ const messageInfo = [
 
 const MessageInfo = (props) => {
   var ws;
+  var username = localStorage.getItem("username");
   useEffect(() => {
     ws = new WebSocket("ws://localhost:7002/websocket/admin");
   })
@@ -104,7 +105,7 @@ const MessageInfo = (props) => {
     console.log("发送信息");
     if (ws.readyState == 1) {
       var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
-      var message = {"message": editContent, "username":"maximus", "to":"toUser"};
+      var message = {"message": editContent, "username": username, "to":"toUser"};
       ws.send(JSON.stringify(message));
     }
   }
