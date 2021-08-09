@@ -1,5 +1,5 @@
 export function judge(x,y,put) {
-  //竖着
+  //横着
   let count1 = 0;
   for (let i = x; i >= 22; i -= 44) {
     if (i !== x) {

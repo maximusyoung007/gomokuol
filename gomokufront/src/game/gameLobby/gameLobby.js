@@ -10,14 +10,14 @@ const GameLobby = () => {
 
   //页面加载完成后获取高度，根据获取到的高度重新渲染表格
   useEffect(() => {
-    let ttt = document.getElementById("ttt");
-    let h = ttt.clientHeight;
-    setHeight(h);
-    window.addEventListener("resize", () => {
-      let ttt = document.getElementById("ttt");
-      let h = ttt.clientHeight;
-      setHeight(h);
-    });
+    // let ttt = document.getElementById("ttt");
+    // let h = ttt.clientHeight;
+    // setHeight(h);
+    // window.addEventListener("resize", () => {
+    //   let ttt = document.getElementById("ttt");
+    //   let h = ttt.clientHeight;
+    //   setHeight(h);
+    // });
   },[])
 
   return (

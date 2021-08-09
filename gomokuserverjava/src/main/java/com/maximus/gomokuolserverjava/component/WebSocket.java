@@ -97,7 +97,7 @@ public class WebSocket {
         String toUsername = jsonObject.getString("to");
         Map<String, Object> map1 = new HashMap<>();
         map1.put("messageType", 4);
-        map1.put("textMessage", textMessage);
+        map1.put("textMessage", message);
         map1.put("fromUsername", fromUsername);
         if (toUsername.equals("all")) {
             map1.put("toUsername", "所有人");
@@ -107,6 +107,7 @@ public class WebSocket {
             sendMessageTo(JSON.toJSONString(map1), toUsername);
         }
     }
+
 
 
 

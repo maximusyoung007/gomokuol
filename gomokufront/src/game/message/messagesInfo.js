@@ -7,7 +7,6 @@ import others from './others.jpeg';
 
 require('../game.css')
 
-
 const messageInfo = [
   {
     "key": 5,
@@ -101,20 +100,13 @@ const MessageInfo = (props) => {
   useEffect(() => {
     ws = new WebSocket("ws://localhost:7002/websocket/admin");
   })
-  function sendMessage(value) {
-    var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
-    ws.onopen = function () {
-      console.log('连接成功');
+  function sendMessage() {
+    console.log("发送信息");
+    if (ws.readyState == 1) {
+      var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
+      var message = {"message": editContent, "username":"maximus", "to":"toUser"};
+      ws.send(JSON.stringify(message));
     }
-    ws.onmessage = function (message) {
-      var received_msg = JSON.parse(message.data);
-      if (editContent) {
-        ws.send(editContent);
-      }
-    }
-    // ws.onclose = function () {
-    //   console.log("连接已关闭");
-    // }
   }
   const messageList = messageInfo.map((chat) =>
     chat.title === "me" ?
@@ -132,21 +124,21 @@ const MessageInfo = (props) => {
         </div>
       </div>
     </div> :
-      <div key={chat.key} className={'message-others'}>
-        <img className={'message-others-avatar'} src={others}/>
-        <div className={"content-others"}>
-          <h4 className={'other-names'}>{chat.title}</h4>
-          <div className={'bubble-content-others'}>
-            <div className={'bubble-others'}>
-              <div className={'plain-others'}>
-                <div className={'message-plain-others'}>
-                  {chat.chatContent}
-                </div>
+    <div key={chat.key} className={'message-others'}>
+      <img className={'message-others-avatar'} src={others}/>
+      <div className={"content-others"}>
+        <h4 className={'other-names'}>{chat.title}</h4>
+        <div className={'bubble-content-others'}>
+          <div className={'bubble-others'}>
+            <div className={'plain-others'}>
+              <div className={'message-plain-others'}>
+                {chat.chatContent}
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   )
   return(
     <div>
