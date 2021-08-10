@@ -12,7 +12,7 @@ import java.util.Date;
 public class JwtUtil {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-    private static final Long EXPIRE_TIME = 5 * 60 * 1000L;
+    private static final Long EXPIRE_TIME = 50 * 60 * 1000L;
 
     private static final String SECRET = "mySecret";
 

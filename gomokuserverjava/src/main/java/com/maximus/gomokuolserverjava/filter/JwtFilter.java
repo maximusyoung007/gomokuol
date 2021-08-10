@@ -23,7 +23,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest request1 = (HttpServletRequest) request;
-        return request1.getHeader("token") != null;
+        return request1.getHeader("token") == null;
     }
 
     /**

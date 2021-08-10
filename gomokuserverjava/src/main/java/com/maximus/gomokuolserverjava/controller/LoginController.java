@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class LoginController {
@@ -43,7 +44,9 @@ public class LoginController {
         //将所有已登录的用户存在list里，list放在session里
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
         if (session.getAttribute("userList") != null) {
-            List<String> userList = (List<String>) session.getAttribute("userList");
+            Object object = session.getAttribute("userList");
+            List<String> list1 = List.class.cast(object);
+            List<String> userList = list1.stream().map(e -> (String)e).collect(Collectors.toList());
             userList.add(user.getName());
             session.setAttribute("userList", userList);
         } else {

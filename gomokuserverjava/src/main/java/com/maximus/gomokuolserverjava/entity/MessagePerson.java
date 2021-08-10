@@ -30,12 +30,12 @@ public class MessagePerson implements Serializable {
     /**
      * 登录者
      */
-    private String from;
+    private String fromPerson;
 
     /**
      * 消息人
      */
-    private String to;
+    private String toPerson;
 
 
 }

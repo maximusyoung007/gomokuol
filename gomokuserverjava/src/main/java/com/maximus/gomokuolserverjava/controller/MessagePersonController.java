@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maximus.gomokuolserverjava.entity.MessagePerson;
 import com.maximus.gomokuolserverjava.service.MessagePersonService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -23,22 +25,23 @@ import java.util.List;
  * @since 2021-08-09
  */
 @Controller
-@RequestMapping("/messagePerson")
+@RequestMapping("/game/messagePerson")
 public class MessagePersonController {
     @Resource
     private MessagePersonService messagePersonService;
 
     @PostMapping("getMessagePerson")
-    public JSONObject getMessagePerson(MessagePerson person) {
+    @ResponseBody
+    public JSONObject getMessagePerson(@RequestBody MessagePerson person) {
         JSONObject outJson = new JSONObject();
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("from", person.getFrom());
+        wrapper.eq("from_person", person.getFromPerson());
         List<MessagePerson> messagePeople = messagePersonService.list(wrapper);
         List<JSONObject> peopleJson = new ArrayList<>();
         for (MessagePerson person1 : messagePeople) {
             JSONObject json = new JSONObject();
             json.put("key", person1.getId());
-            json.put("title", "周杰伦");
+            json.put("title", person1.getToPerson());
             json.put("path", "/game/message/messageInfo");
             peopleJson.add(json);
         }
