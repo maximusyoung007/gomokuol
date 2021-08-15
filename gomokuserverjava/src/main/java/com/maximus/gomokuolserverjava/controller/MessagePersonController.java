@@ -4,6 +4,8 @@ package com.maximus.gomokuolserverjava.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.maximus.gomokuolserverjava.entity.MessagePerson;
+import com.maximus.gomokuolserverjava.entity.Messages;
+import com.maximus.gomokuolserverjava.result.Result;
 import com.maximus.gomokuolserverjava.service.MessagePersonService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +44,7 @@ public class MessagePersonController {
             JSONObject json = new JSONObject();
             json.put("key", person1.getId());
             json.put("title", person1.getToPerson());
-            json.put("path", "/game/message/messageInfo");
+            json.put("path", "/game/message/messageInfo/" + person1.getToPerson());
             peopleJson.add(json);
         }
         outJson.put("data", peopleJson);

@@ -30,12 +30,12 @@ public class Messages implements Serializable {
     /**
      * 联系人1
      */
-    private String from;
+    private String fromPerson;
 
     /**
      * 联系人2
      */
-    private String to;
+    private String toPerson;
 
     /**
      * 消息

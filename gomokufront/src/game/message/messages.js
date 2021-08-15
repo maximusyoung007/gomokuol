@@ -21,7 +21,7 @@ const Messages = ({match}) => {
         <div className={"messageInfo"}>
           <Switch>
             <Route exact path={`${match.url}`} component={Blank}/>
-            <Route path={`${match.url}/messageInfo`} component={MessageInfo}/>
+            <Route path={`${match.url}/messageInfo/:toPerson`} component={MessageInfo}/>
           </Switch>
         </div>
       </div>

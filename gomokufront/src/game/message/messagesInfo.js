@@ -1,116 +1,57 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button } from "antd";
 import { SmileOutlined, FolderOutlined, ScissorOutlined } from '@ant-design/icons';
 import myAvatar from './avatar.jpg';
 import others from './others.jpeg';
-
+import axios from '../../interceptor/interceptor';
 
 require('../game.css')
 
-const messageInfo = [
-  {
-    "key": 5,
-    "title": "me",
-    'chatContent': '你好'
-  },
-  {
-    "key": 6,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 7,
-    "title": "me",
-    'chatContent': '你好'
-  },
-  {
-    "key": 8,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 9,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 10,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 11,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 12,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 13,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 14,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 15,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 16,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 17,
-    "title": "周杰伦",
-    'chatContent': '你好'
-  },
-  {
-    "key": 18,
-    "title": "周杰伦18",
-    'chatContent': '你好'
-  },
-  {
-    "key": 19,
-    "title": "周杰伦18",
-    'chatContent': '你好'
-  },
-  {
-    "key": 20,
-    "title": "周杰伦18",
-    'chatContent': '你好'
-  },
-  {
-    "key": 21,
-    "title": "周杰伦18",
-    'chatContent': '你好'
-  },
-]
-
-const MessageInfo = (props) => {
-  var ws;
+const MessageInfo = ({match}) => {
   var username = localStorage.getItem("username");
+  const toPerson = match.params.toPerson;
+  console.log(toPerson);
+  const[messageInfo, setMessageInfo] = useState([]);
+  var ws = new WebSocket("ws://localhost:7002/websocket/" + username);
   useEffect(() => {
-    ws = new WebSocket("ws://localhost:7002/websocket/admin");
-  })
+    axios({
+      method: 'post',
+      url: "/game/messages/getMessages",
+      data: {
+        "fromPerson": username,
+        "toPerson": toPerson
+      }
+    }).then(function(data) {
+      setMessageInfo(data.messages);
+    })
+  }, [])
   function sendMessage() {
     console.log("发送信息");
+    // console.log(ws.readyState);
+    var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
+    axios({
+      method: 'post',
+      url: "/game/messages/addMessage",
+      data: {
+        "fromPerson": username,
+        "toPerson": toPerson,
+        "message": editContent
+      }
+    }).then(function(data) {
+      console.log(data);
+      if (data.success) {
+        var newMessage = data.data;
+        setMessageInfo(newMessage.concat(messageInfo));
+      }
+    })
+    console.log(ws);
     if (ws.readyState == 1) {
-      var editContent = document.getElementsByClassName("editArea")[0].innerHTML;
       var message = {"message": editContent, "username": username, "to":"toUser"};
       ws.send(JSON.stringify(message));
     }
   }
   const messageList = messageInfo.map((chat) =>
-    chat.title === "me" ?
+    chat.title === username ?
     <div key={chat.key} className={'message-me'}>
       <img className={'message-me-avatar'} src={myAvatar}/>
       <div className={'content-me'}>
@@ -147,7 +88,7 @@ const MessageInfo = (props) => {
         <div className={'title_wrap'}>
           <div className={'title'}>
             <a className={'title_name'}>
-              周杰伦
+              {toPerson}
             </a>
           </div>
         </div>

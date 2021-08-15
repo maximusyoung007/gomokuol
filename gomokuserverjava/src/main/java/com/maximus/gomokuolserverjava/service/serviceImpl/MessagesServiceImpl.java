@@ -6,6 +6,9 @@ import com.maximus.gomokuolserverjava.service.MessagesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -16,5 +19,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessagesServiceImpl extends ServiceImpl<MessagesMapper, Messages> implements MessagesService {
+    @Resource
+    private MessagesMapper messagesMapper;
 
+    public List<Messages> getMessages(Messages messages) {
+        return messagesMapper.getMessages(messages);
+    }
+
+    public int addAndGetKey(Messages messages) {
+        return messagesMapper.addAndGetKey(messages);
+    }
 }

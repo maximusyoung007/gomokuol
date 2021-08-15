@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maximus.gomokuolserverjava.mapper.MessagesMapper">
+    <select id="getMessages" parameterType="com.maximus.gomokuolserverjava.entity.Messages" resultType="com.maximus.gomokuolserverjava.entity.Messages">
+        SELECT id, from_person, to_person, message
+        FROM
+        messages
+        WHERE (from_person = #{fromPerson} AND to_person = #{toPerson})
+        OR (from_person = #{toPerson} AND to_person = #{fromPerson})
+        ORDER BY add_time
+    </select>
 
+    <insert id="addAndGetKey" parameterType="com.maximus.gomokuolserverjava.entity.Messages">
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO messages(from_person, to_person, message, add_time)
+        VALUES (#{fromPerson}, #{toPerson}, #{message}, now())
+    </insert>
 </mapper>
