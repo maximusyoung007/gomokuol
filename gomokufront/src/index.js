@@ -5,7 +5,7 @@ import App from './App';
 import Router from "./router";
 
 ReactDOM.render(
-    <Router/>,
+    <App/>,
   document.getElementById('root')
 );
 
